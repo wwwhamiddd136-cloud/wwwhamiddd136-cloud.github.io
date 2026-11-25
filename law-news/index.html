@@ -1,0 +1,44 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مستجدات القانون المغربي | حميد العناية</title>
+<meta name="description" content="آخر النصوص القانونية المنشورة في الجريدة الرسمية المغربية، ملخصات تعريفية مع رابط النص الرسمي.">
+<link rel="canonical" href="https://wwwhamiddd136-cloud.github.io/law-news/">
+<meta name="theme-color" content="#100b24">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:"Noto Naskh Arabic","Noto Sans Arabic",Tahoma,sans-serif;background:radial-gradient(circle at 50% 0,#2a1250,#0c0618 60%) fixed;color:#efe8ff;line-height:1.8;min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+.back{color:#ffd27a;text-decoration:none;font-size:14px}
+h1{margin:10px 0 4px;font-size:28px}.sub{color:#b9a8dc;margin:0 0 16px;font-size:15px}
+.note{background:#1a0f33;border:1px solid #4a2a85;border-radius:12px;padding:10px 14px;font-size:14px;color:#cdbcf0;margin-bottom:20px}
+.card{background:linear-gradient(160deg,#1d1038,#140a28);border:1px solid #3d2470;border-radius:16px;padding:16px 18px;margin-bottom:14px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:#a995d4}
+.tag{background:#5b2fb0;color:#fff;border-radius:8px;padding:0 9px}
+.card h2{font-size:18px;margin:8px 0 4px}.card p{margin:4px 0 10px;color:#e3d8fa;font-size:15.5px}
+.src a,.foot a{color:#ffd27a;font-size:14px;text-decoration:none;border-bottom:1px dotted #ffd27a}
+.foot{font-size:13px;color:#a995d4;margin-top:18px}
+@media(max-width:480px){h1{font-size:23px}.card{padding:13px}}
+</style></head><body><div class="wrap">
+<a class="back" href="/">← العودة إلى الموقع</a>
+<h1>مستجدات القانون المغربي</h1>
+<p class="sub">آخر النصوص المنشورة في الجريدة الرسمية، مع رابط النص الرسمي لكل خبر.</p>
+<div class="note">آخر فحص: <b id="chk">...</b>. المصدر: الجريدة الرسمية (الأمانة العامة للحكومة). ملخصات تعريفية فقط، وليست استشارة قانونية. يُفحص المصدر كل يوم، وتُضاف النصوص عند صدور عدد جديد فقط.</div>
+<div id="list"><noscript>يتطلب هذا القسم تفعيل جافاسكريبت. الجريدة الرسمية: <a href="https://www.sgg.gov.ma/arabe/BulletinOfficiel.aspx">sgg.gov.ma</a></noscript></div>
+<div class="foot">جميع الأعداد: <a href="https://www.sgg.gov.ma/arabe/BulletinOfficiel.aspx">الجريدة الرسمية، الأمانة العامة للحكومة</a></div>
+</div>
+<script>
+fetch('news.json?v='+Date.now()).then(r=>r.json()).then(d=>{
+document.getElementById('chk').textContent=d.lastCheckedText;
+var l=document.getElementById('list');
+d.items.forEach(function(i){
+var c=document.createElement('div');c.className='card';
+var m=document.createElement('div');m.className='meta';
+var t=document.createElement('span');t.className='tag';t.textContent=i.tag;
+var b=document.createElement('span');b.textContent='الجريدة الرسمية عدد '+i.bo+' · '+i.boDate;
+m.appendChild(t);m.appendChild(b);
+var h=document.createElement('h2');h.textContent=i.title;
+var p=document.createElement('p');p.textContent=i.summary;
+var s=document.createElement('div');s.className='src';
+var a=document.createElement('a');a.href=i.pdf;a.rel='noopener noreferrer';a.target='_blank';a.textContent='النص الرسمي (PDF)';
+s.appendChild(a);
+[m,h,p,s].forEach(function(e){c.appendChild(e)});l.appendChild(c);});
+}).catch(function(){document.getElementById('chk').textContent='غير متاح';});
+</script></body></html>
