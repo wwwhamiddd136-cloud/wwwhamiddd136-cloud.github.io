@@ -14,21 +14,22 @@ h1{margin:10px 0 4px;font-size:28px}.sub{color:#b9a8dc;margin:0 0 16px;font-size
 .tag{background:#5b2fb0;color:#fff;border-radius:8px;padding:0 9px}
 .card h2{font-size:18px;margin:8px 0 4px}.card p{margin:4px 0 10px;color:#e3d8fa;font-size:15.5px}
 .src a,.foot a{color:#ffd27a;font-size:14px;text-decoration:none;border-bottom:1px dotted #ffd27a}
-.foot{font-size:13px;color:#a995d4;margin-top:18px}
+.tools{margin-bottom:14px}#q{width:100%;padding:11px 14px;border-radius:12px;border:1px solid #4a2a85;background:#1a0f33;color:#efe8ff;font:inherit;font-size:16px}.cats{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.cats button{font:inherit;font-size:14px;border:1px solid #4a2a85;background:#1a0f33;color:#d9c4ff;border-radius:99px;padding:2px 14px;cursor:pointer}.cats button[aria-pressed=true]{background:#5b2fb0;color:#fff}.count{font-size:13px;color:#a995d4;margin-bottom:10px}.foot{font-size:13px;color:#a995d4;margin-top:18px}
 @media(max-width:480px){h1{font-size:23px}.card{padding:13px}}
 </style></head><body><div class="wrap">
 <a class="back" href="/">← العودة إلى الموقع</a>
 <h1>مستجدات القانون المغربي</h1>
 <p class="sub">آخر النصوص المنشورة في الجريدة الرسمية، مع رابط النص الرسمي لكل خبر.</p>
 <div class="note">آخر فحص: <b id="chk">...</b>. المصدر: الجريدة الرسمية (الأمانة العامة للحكومة). ملخصات تعريفية فقط، وليست استشارة قانونية. يُفحص المصدر كل يوم، وتُضاف النصوص عند صدور عدد جديد فقط.</div>
+<div class="tools"><input id="q" type="search" placeholder="ابحث في النصوص..." aria-label="بحث"><div id="cats" class="cats"></div></div><div id="count" class="count"></div>
 <div id="list"><noscript>يتطلب هذا القسم تفعيل جافاسكريبت. الجريدة الرسمية: <a href="https://www.sgg.gov.ma/arabe/BulletinOfficiel.aspx">sgg.gov.ma</a></noscript></div>
 <div class="foot">جميع الأعداد: <a href="https://www.sgg.gov.ma/arabe/BulletinOfficiel.aspx">الجريدة الرسمية، الأمانة العامة للحكومة</a></div>
 </div>
 <script>
-fetch('news.json?v='+Date.now()).then(r=>r.json()).then(d=>{
-document.getElementById('chk').textContent=d.lastCheckedText;
-var l=document.getElementById('list');
-d.items.forEach(function(i){
+var all=[],cat='',q='';
+function norm(x){return (x||'').replace(/[\u064B-\u0652\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').toLowerCase()}
+function render(){var l=document.getElementById('list');l.textContent='';var n=0;
+all.forEach(function(i){if(cat&&i.tag!==cat)return;if(q&&norm([i.title,i.summary,i.tag,i.bo,i.boDate].join(' ')).indexOf(q)<0)return;n++;
 var c=document.createElement('div');c.className='card';
 var m=document.createElement('div');m.className='meta';
 var t=document.createElement('span');t.className='tag';t.textContent=i.tag;
@@ -38,7 +39,15 @@ var h=document.createElement('h2');h.textContent=i.title;
 var p=document.createElement('p');p.textContent=i.summary;
 var s=document.createElement('div');s.className='src';
 var a=document.createElement('a');a.href=i.pdf;a.rel='noopener noreferrer';a.target='_blank';a.textContent='النص الرسمي (PDF)';
-s.appendChild(a);
-[m,h,p,s].forEach(function(e){c.appendChild(e)});l.appendChild(c);});
-}).catch(function(){document.getElementById('chk').textContent='غير متاح';});
+s.appendChild(a);[m,h,p,s].forEach(function(e){c.appendChild(e)});l.appendChild(c)});
+document.getElementById('count').textContent=n+' من '+all.length+' نصا';
+if(!n){l.textContent='لا نتائج.'}}
+function cats(){var tags=[];all.forEach(function(i){if(tags.indexOf(i.tag)<0)tags.push(i.tag)});
+var box=document.getElementById('cats');box.textContent='';
+['الكل'].concat(tags).forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t;b.setAttribute('aria-pressed',String((t==='الكل'&&!cat)||t===cat));
+b.onclick=function(){cat=t==='الكل'?'':t;cats();render()};box.appendChild(b)})}
+document.getElementById('q').addEventListener('input',function(e){q=norm(e.target.value.trim());render()});
+fetch('news.json?v='+Date.now()).then(function(r){return r.json()}).then(function(d){
+document.getElementById('chk').textContent=d.lastCheckedText;
+all=d.items;cats();render();}).catch(function(){document.getElementById('chk').textContent='غير متاح'});
 </script></body></html>
