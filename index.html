@@ -88,6 +88,11 @@ launch(idea);`;if(matchMedia("(prefers-reduced-motion: reduce)").matches){Me(Y);
 @keyframes cvLoaderOut{to{opacity:0;visibility:hidden}}
 @media(max-width:600px){.cv-loader span{font-size:22px!important}.cv-loader::before{height:112px}}
 @media(prefers-reduced-motion:reduce){.cv-loader::before,.cv-loader span{animation:none!important}}
+
+.cv-loader{pointer-events:auto!important;cursor:pointer}
+.cv-loader.cv-skip{pointer-events:none!important;animation:cvLoaderOut .25s ease-in both!important}
+.cv-loader.cv-skip::before{animation:cvCardOut .25s ease-in both!important}
+@media(prefers-reduced-motion:reduce){.cv-loader{animation:cvLoaderOut .3s 1.2s linear both!important}}
 </style>
-</head><body><div id="root"></div><script>(function(){function f(){var c=document.querySelector(".cv-counters strong[data-count]"),n=document.querySelectorAll(".work-grid > article.project").length;if(c&&n&&c.getAttribute("data-count")!==String(n)){c.setAttribute("data-count",String(n));c.textContent=String(n)}}setInterval(f,1500);window.addEventListener("load",f)})();</script></body></html>
+</head><body><div id="root"></div><script>(function(){function f(){var c=document.querySelector(".cv-counters strong[data-count]"),n=document.querySelectorAll(".work-grid > article.project").length;if(c&&n&&c.getAttribute("data-count")!==String(n)){c.setAttribute("data-count",String(n));c.textContent=String(n)}}setInterval(f,1500);window.addEventListener("load",f)})();</script><script>(function(){function k(e){var l=document.querySelector(".cv-loader");if(l&&!l.classList.contains("cv-loaded"))l.classList.add("cv-skip")}document.addEventListener("click",function(e){if(e.target.closest&&e.target.closest(".cv-loader"))k()});document.addEventListener("keydown",function(e){if(e.key==="Escape")k()})})();</script></body></html>
 

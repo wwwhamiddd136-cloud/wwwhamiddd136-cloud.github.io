@@ -14,7 +14,21 @@ h1{margin:10px 0 4px;font-size:27px}.sub{color:#a9b8dc;margin:0 0 16px;font-size
 .warn{background:#2a2410;border:1px solid #7a6a22;border-radius:12px;padding:10px 14px;font-size:14px;color:#f3e3a0;margin:14px 0}
 .note{font-size:13px;color:#8fa3cf;margin-top:16px}.note a{color:#ffd27a}
 @media(max-width:480px){h1{font-size:22px}.cd b{font-size:24px}.row{flex-direction:column;gap:0}}
-</style></head><body><div class="wrap">
+</style><style id="gi-css">
+#gi{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:#08051b73;-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);cursor:pointer;-webkit-tap-highlight-color:transparent;animation:giOut .55s 2.1s ease-in both}
+#gi::before{content:"";grid-area:1/1;width:min(84vw,400px);height:128px;box-sizing:border-box;border-radius:26px;border:1px solid #ffffff40;background:linear-gradient(145deg,#ffffff30,#7b5cff1f);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 22px 70px #0000008c,inset 0 1px 0 #ffffff55;animation:giIn .7s cubic-bezier(.2,.9,.25,1.15) both,giCardOut .55s 2.1s ease-in both}
+#gi span{grid-area:1/1;z-index:1;max-width:min(76vw,340px);text-align:center;font:600 24px/1.5 "Noto Naskh Arabic","Noto Sans Arabic",Tahoma,sans-serif;color:#e9fff1;text-shadow:0 0 18px #b7ffcf88;border-inline-end:2px solid currentColor;padding-inline-end:7px;animation:giText .6s .1s ease-out both}
+[data-theme=light] #gi{background:#ffffff66}
+[data-theme=light] #gi::before{background:linear-gradient(145deg,#ffffffcc,#e6dcfa99);border-color:#ffffffe6;box-shadow:0 22px 60px #3a2a6840,inset 0 1px 0 #fff}
+[data-theme=light] #gi span{color:#1f7a55;text-shadow:none}
+#gi.gi-skip{animation:giOut .25s ease-in both;pointer-events:none}
+#gi.gi-skip::before{animation:giCardOut .25s ease-in both}
+@keyframes giIn{from{opacity:0;transform:translateY(24px) scale(.82)}to{opacity:1;transform:none}}
+@keyframes giCardOut{to{opacity:0;transform:translateY(-22px) scale(.92)}}
+@keyframes giText{from{opacity:0}to{opacity:1}}
+@keyframes giOut{to{opacity:0;visibility:hidden;pointer-events:none}}
+@media(prefers-reduced-motion:reduce){#gi{animation:giOut .3s 1.4s linear both}#gi::before,#gi span{animation:none}#gi.gi-skip{animation:giOut .01s both}}
+</style></head><body><div id="gi" aria-hidden="true"><span>رزنامة امتحانات كلية الحقوق بفاس</span></div><div class="wrap">
 <a class="back" href="/">← العودة إلى الموقع</a>
 <h1>رزنامة امتحانات كلية الحقوق بفاس</h1>
 <p class="sub">الموسم الجامعي 2026-2027 · كلية العلوم القانونية والسياسية بفاس (جامعة سيدي محمد بن عبد الله)</p>
@@ -38,4 +52,4 @@ var T=new Date('2027-01-05T00:00:00+01:00').getTime();
 function tick(){var x=T-Date.now();if(x<=0){document.getElementById('cdt').textContent='بدأت الامتحانات العادية للدورة الخريفية';x=0}
 var s=Math.floor(x/1000);document.getElementById('d').textContent=Math.floor(s/86400);document.getElementById('h').textContent=Math.floor(s%86400/3600);document.getElementById('m').textContent=Math.floor(s%3600/60);document.getElementById('s').textContent=s%60}
 tick();setInterval(tick,1000);
-</script></body></html>
+</script><script id="gi-js">(function(){var g=document.getElementById("gi");if(!g)return;var s=g.firstChild,t=s.textContent,red=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;function end(){g.classList.add("gi-skip");setTimeout(function(){if(g.parentNode)g.parentNode.removeChild(g)},700)}if(!red){var n=0;s.textContent="";var iv=setInterval(function(){s.textContent=t.slice(0,++n);if(n>=t.length)clearInterval(iv)},70)}g.addEventListener("click",end);document.addEventListener("keydown",end,{once:true});setTimeout(end,red?1800:2900)})();</script></body></html>
